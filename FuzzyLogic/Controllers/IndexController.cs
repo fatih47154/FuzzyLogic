@@ -37,14 +37,46 @@ namespace FuzzyLogic.Controllers
 
             dataPoints5.Add(new DataPoint(75, 0));
             dataPoints5.Add(new DataPoint(87.5, 1));
-            dataPoints5.Add(new DataPoint(100, 0));
+            dataPoints5.Add(new DataPoint(100, 1));
 
             ViewBag.DataPoints1 = JsonConvert.SerializeObject(dataPoints1);
             ViewBag.DataPoints2 = JsonConvert.SerializeObject(dataPoints2);
             ViewBag.DataPoints3 = JsonConvert.SerializeObject(dataPoints3);
-            ViewBag.DataPoints4 = JsonConvert.SerializeObject(dataPoints3);
             ViewBag.DataPoints4 = JsonConvert.SerializeObject(dataPoints4);
+            ViewBag.DataPoints5 = JsonConvert.SerializeObject(dataPoints5);
 
+            //Rezistans
+            List<DataPoint> dataPoints11 = new List<DataPoint>();
+            List<DataPoint> dataPoints12 = new List<DataPoint>();
+            List<DataPoint> dataPoints13 = new List<DataPoint>();
+            List<DataPoint> dataPoints14 = new List<DataPoint>();
+            List<DataPoint> dataPoints15 = new List<DataPoint>();
+
+            dataPoints11.Add(new DataPoint(0, 1));
+            dataPoints11.Add(new DataPoint(0.5, 1));
+            dataPoints11.Add(new DataPoint(1, 0));
+
+            dataPoints12.Add(new DataPoint(0.5, 0));
+            dataPoints12.Add(new DataPoint(1.25, 1));
+            dataPoints12.Add(new DataPoint(2, 0));
+
+            dataPoints13.Add(new DataPoint(1.5, 0));
+            dataPoints13.Add(new DataPoint(2.5, 1));
+            dataPoints13.Add(new DataPoint(3.5, 0));
+
+            dataPoints14.Add(new DataPoint(3, 0));
+            dataPoints14.Add(new DataPoint(3.75, 1));
+            dataPoints14.Add(new DataPoint(4.5, 0));
+
+            dataPoints15.Add(new DataPoint(4, 0));
+            dataPoints15.Add(new DataPoint(4.5, 1));
+            dataPoints15.Add(new DataPoint(5, 1));
+
+            ViewBag.DataPoints11 = JsonConvert.SerializeObject(dataPoints11);
+            ViewBag.DataPoints12 = JsonConvert.SerializeObject(dataPoints12);
+            ViewBag.DataPoints13 = JsonConvert.SerializeObject(dataPoints13);
+            ViewBag.DataPoints14 = JsonConvert.SerializeObject(dataPoints14);
+            ViewBag.DataPoints15 = JsonConvert.SerializeObject(dataPoints15);
             return View();
         }
 
