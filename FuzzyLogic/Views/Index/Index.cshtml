@@ -6,6 +6,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        window.onload = function () {
+ 
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Product Trends By Month"
+                },
+                axisY: {
+                    includeZero: true
+                },
+                axisX: {
+                    includeZero: true
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [{
+                    type: "line",
+                    name: "Desktops",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints1)
+                }, 
+                {
+                    type: "line",
+                    name: "Laptops",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints2)
+                }, {
+                    type: "line",
+                    name: "Mobiles",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints3)
+                }, {
+                    type: "line",
+                    name: "Mobiles1",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints4)
+                }]
+            });
+            chart.render();
+ 
+        }
+    </script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -19,16 +64,16 @@
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Content/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="/Content/css/table-responsive.css" rel="stylesheet" />
+    <link href="/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/Content/css/table-responsive.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
     <link href="/Content/css/style.css" rel="stylesheet">
-    <link href="/Content/css/style-responsive.css" rel="stylesheet" />
+    <link href="/Content/css/style-responsive.css" rel="stylesheet"/>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-      <script src="/Content/js/html5shiv.js"></script>
-      <script src="/Content/js/respond.min.js"></script>
+        <script src="/Content/js/html5shiv.js"></script>
+        <script src="/Content/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -184,6 +229,31 @@
                                         </tbody>
                                     </table>
                                 </section>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Basic Forms
+                            </header>
+                            <div class="panel-body">
+                                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Basic Forms
+                            </header>
+                            <div class="panel-body">
+
                             </div>
                         </section>
                     </div>
