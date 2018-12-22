@@ -43,6 +43,7 @@ namespace FuzzyLogic.Controllers
                 TempData["Hata"] = "Kriterlere uygun değerler giriniz";
             }
 
+            ViewBag.tablo = nesne.tablo;
             return RedirectToAction("Index");
         }
     }
