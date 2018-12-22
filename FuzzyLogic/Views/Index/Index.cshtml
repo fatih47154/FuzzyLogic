@@ -3,6 +3,29 @@
     Layout = null;
 }
 
+<style>
+    th {
+        background-color: #006666;
+        color: white;
+        text-align:center;
+       }
+    tr{
+        text-align:center;
+    }
+    table.ortala {
+        width: 1000px;
+        height: auto;
+        padding: 20px;        
+        position: relative;
+        margin: auto;
+        background-color:antiquewhite;
+    }
+    h4{
+        text-align:center;
+    }
+</style>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,11 +60,9 @@
     <section>
         <!--header start-->
         <header class="header white-bg">
-            <div class="sidebar-toggle-box">
-                <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
-            </div>
+            
             <!--logo start-->
-            <a href="/Content/index.html" class="logo">Flat<span>lab</span></a>
+            <a class="logo">Fuzzy<span>Logic</span></a>
             <!--logo end-->
         </header>
         
@@ -51,136 +72,62 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                                Responsive table
+                               <h4> Bulanık Kural Tabanı</h4>
                             </header>
                             <div class="panel-body">
                                 <section>
-                                    <table class="table table-bordered table-striped table-condensed">
+                                    <table class="table table-bordered table-striped table-condensed ortala">
                                         <thead>
                                         <tr>
-                                            <th style="border-right-width: 3px;border-bottom-width: 3px">AAC</th>
-                                            <th style="border-bottom-width: 3px">Company</th>
-                                            <th style="border-bottom-width: 3px">Price</th>
-                                            <th style="border-bottom-width: 3px">Change</th>
-                                            <th style="border-bottom-width: 3px">Change %</th>
-                                            <th style="border-bottom-width: 3px">Open</th>
-                                            <th style="border-bottom-width: 3px">High</th>
-                                            <th style="border-bottom-width: 3px">Low</th>
-                                            <th style="border-bottom-width: 3px">Volume</th>
+                                            <th style="border-right-width: 3px; background-color:#339966">Seviye\Sıcaklık</th>
+                                            <th style="border-bottom-width: 3px">Çok Düşük</th>
+                                            <th style="border-bottom-width: 3px">Düşük</th>
+                                            <th style="border-bottom-width: 3px">Orta</th>
+                                            <th style="border-bottom-width: 3px">Yüksek</th>
+                                            <th style="border-bottom-width: 3px">Çok Yüksek</th>                                            
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-                                            <td class="numeric">$1.38</td>
-                                            <td class="numeric">-0.01</td>
-                                            <td class="numeric">-0.36%</td>
-                                            <td class="numeric">$1.39</td>
-                                            <td class="numeric">$1.39</td>
-                                            <td class="numeric">$1.38</td>
-                                            <td class="numeric">9,395</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>ARDENT LEISURE GROUP</td>
-                                            <td class="numeric">$1.15</td>
-                                            <td class="numeric">  +0.02</td>
-                                            <td class="numeric">1.32%</td>
-                                            <td class="numeric">$1.14</td>
-                                            <td class="numeric">$1.15</td>
-                                            <td class="numeric">$1.13</td>
-                                            <td class="numeric">56,431</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>AUSENCO LIMITED</td>
-                                            <td class="numeric">$4.00</td>
-                                            <td class="numeric">-0.04</td>
-                                            <td class="numeric">-0.99%</td>
-                                            <td class="numeric">$4.01</td>
-                                            <td class="numeric">$4.05</td>
-                                            <td class="numeric">$4.00</td>
-                                            <td class="numeric">90,641</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>ADELAIDE BRIGHTON LIMITED</td>
-                                            <td class="numeric">$3.00</td>
-                                            <td class="numeric">  +0.06</td>
-                                            <td class="numeric">2.04%</td>
-                                            <td class="numeric">$2.98</td>
-                                            <td class="numeric">$3.00</td>
-                                            <td class="numeric">$2.96</td>
-                                            <td class="numeric">862,518</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>ABACUS PROPERTY GROUP</td>
-                                            <td class="numeric">$1.91</td>
-                                            <td class="numeric">0.00</td>
-                                            <td class="numeric">0.00%</td>
-                                            <td class="numeric">$1.92</td>
-                                            <td class="numeric">$1.93</td>
-                                            <td class="numeric">$1.90</td>
-                                            <td class="numeric">595,701</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>ADITYA BIRLA MINERALS LIMITED</td>
-                                            <td class="numeric">$0.77</td>
-                                            <td class="numeric">  +0.02</td>
-                                            <td class="numeric">2.00%</td>
-                                            <td class="numeric">$0.76</td>
-                                            <td class="numeric">$0.77</td>
-                                            <td class="numeric">$0.76</td>
-                                            <td class="numeric">54,567</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>ACRUX LIMITED</td>
-                                            <td class="numeric">$3.71</td>
-                                            <td class="numeric">  +0.01</td>
-                                            <td class="numeric">0.14%</td>
-                                            <td class="numeric">$3.70</td>
-                                            <td class="numeric">$3.72</td>
-                                            <td class="numeric">$3.68</td>
-                                            <td class="numeric">191,373</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>ADAMUS RESOURCES LIMITED</td>
-                                            <td class="numeric">$0.72</td>
-                                            <td class="numeric">0.00</td>
-                                            <td class="numeric">0.00%</td>
-                                            <td class="numeric">$0.73</td>
-                                            <td class="numeric">$0.74</td>
-                                            <td class="numeric">$0.72</td>
-                                            <td class="numeric">8,602,291</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>ANGLOGOLD ASHANTI LIMITED</td>
-                                            <td class="numeric">$7.81</td>
-                                            <td class="numeric">-0.22</td>
-                                            <td class="numeric">-2.74%</td>
-                                            <td class="numeric">$7.82</td>
-                                            <td class="numeric">$7.82</td>
-                                            <td class="numeric">$7.81</td>
-                                            <td class="numeric">148</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="border-right-width: 3px">AAC</th>
-                                            <td>AGL ENERGY LIMITED</td>
-                                            <td class="numeric">$13.82</td>
-                                            <td class="numeric">  +0.02</td>
-                                            <td class="numeric">0.14%</td>
-                                            <td class="numeric">$13.83</td>
-                                            <td class="numeric">$13.83</td>
-                                            <td class="numeric">$13.67</td>
-                                            <td class="numeric">846,403</td>
-                                        </tr>
-                                        
+                                            <tr>
+                                                <th style="border-right-width: 3px; background-color:#8585ad">Çok Düşük</th>
+                                                <td class="numeric">Orta</td>
+                                                <td class="numeric">Az</td>
+                                                <td class="numeric">Çok Az</td>
+                                                <td class="numeric">Çıkışta hareket yok</td>
+                                                <td class="numeric">Çıkışta hareket yok</td>                                                
+                                             </tr>                                            
+                                            <tr>
+                                                <th style="border-right-width: 3px; background-color:#8585ad">Düşük</th>
+                                                <td class="numeric">Çok</td>
+                                                <td class="numeric">Orta</td>
+                                                <td class="numeric">Çok Az</td>
+                                                <td class="numeric">Çok Az</td>
+                                                <td class="numeric">Çıkışta hareket yok</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="border-right-width: 3px; background-color:#8585ad">Orta</th>
+                                                <td class="numeric">Aşırı Çok</td>
+                                                <td class="numeric">Çok</td>
+                                                <td class="numeric">Orta</td>
+                                                <td class="numeric">Çok Az</td>
+                                                <td class="numeric">Çıkışta hareket yok</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="border-right-width: 3px; background-color:#8585ad">Yüksek</th>
+                                                <td class="numeric">Aşırı Çok</td>
+                                                <td class="numeric">Çok</td>
+                                                <td class="numeric">Çok</td>
+                                                <td class="numeric">Az</td>
+                                                <td class="numeric">Çıkışta hareket yok</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="border-right-width: 3px; background-color:#8585ad">Çok Yüksek</th>
+                                                <td class="numeric">Aşırı Çok</td>
+                                                <td class="numeric">Çok</td>
+                                                <td class="numeric">Çok</td>
+                                                <td class="numeric">Orta</td>
+                                                <td class="numeric">Çıkışta hareket yok</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </section>
@@ -205,16 +152,16 @@
 
                                 <form role="form" action="Index1">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" name="x" placeholder="Enter email">
+                                        <label>Sıcaklık Değerini Giriniz:</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" name="x" placeholder="Sıcaklık Değerini Giriniz..">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Password</label>
-                                        <input type="text" class="form-control" id="exampleInputPassword1" name="y" placeholder="Password">
+                                        <label>Seviye Değerini Giriniz:</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1" name="y" placeholder="Seviye Değerini Giriniz..">
                                     </div>
                                     
-                                    <button type="submit" class="btn btn-info">Submit</button>
+                                    <button type="submit" class="btn btn-info">Sorgula</button>
                                 </form>
 
                             </div>
@@ -229,10 +176,7 @@
         <!--footer start-->
         <footer class="site-footer">
             <div class="text-center">
-                2013 &copy; FlatLab by VectorLab.
-                <a href="/Content/#" class="go-top">
-                    <i class="icon-angle-up"></i>
-                </a>
+                2018 &copy; Fuzzy Logic by Mehmet ÖZÇELİK & Fatih KARAÜZÜM               
             </div>
         </footer>
         <!--footer end-->
