@@ -35,47 +35,78 @@
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title: {
-                    text: "Product Trends By Month"
-                },
-                axisY: {
-                    includeZero: true
-                },
-                axisX: {
-                    includeZero: true
+                    text: "Sıcaklık"
                 },
                 toolTip: {
                     shared: true
                 },
                 data: [{
                     type: "line",
-                    name: "Desktops",
+                    name: "Çok Düşük",
                     showInLegend: true,
                     dataPoints: @Html.Raw(ViewBag.DataPoints1)
-                },
+                }, 
                 {
                     type: "line",
-                    name: "Laptops",
+                    name: "Düşük",
                     showInLegend: true,
                     dataPoints: @Html.Raw(ViewBag.DataPoints2)
                 }, {
                     type: "line",
-                    name: "Mobiles",
+                    name: "Orta",
                     showInLegend: true,
                     dataPoints: @Html.Raw(ViewBag.DataPoints3)
                 }, {
                     type: "line",
-                    name: "Mobiles1",
+                    name: "Yüksek",
                     showInLegend: true,
                     dataPoints: @Html.Raw(ViewBag.DataPoints4)
-                    },
-                    {
-                        type: "line",
-                        name: "Mobiles1",
-                        showInLegend: true,
-                        dataPoints: @Html.Raw(ViewBag.DataPoints5)
-                    }]
+                }, {
+                    type: "line",
+                    name: "Çok Yüksek",
+                    showInLegend: true,
+                    dataPoints: @Html.Raw(ViewBag.DataPoints5)
+                }]
             });
             chart.render();
+ 
+            var chart1 = new CanvasJS.Chart("chartContainer1", {
+                animationEnabled: true,
+                title: {
+                    text: "Seviye"
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [{
+                        type: "line",
+                        name: "Çok Düşük",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints6)
+                    }, 
+                    {
+                        type: "line",
+                        name: "Düşük",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints7)
+                    }, {
+                        type: "line",
+                        name: "Orta",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints8)
+                    }, {
+                        type: "line",
+                        name: "Yüksek",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints9)
+                    }, {
+                        type: "line",
+                        name: "Çok Yüksek",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints10)
+                    }]
+            });
+            chart1.render();
 
             var chart2 = new CanvasJS.Chart("chartContainer2", {
                 animationEnabled: true,
@@ -122,9 +153,6 @@
             });
             chart2.render();
         }
-        
-
-    
     </script>
 
     <meta charset="utf-8">
@@ -237,9 +265,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <section class="panel">
-                            <header class="panel-heading">
-                                Basic Forms
-                            </header>
+                            
                             <div class="panel-body">
                                 <div id="chartContainer" style="height: 450px; width: 100%;"></div>
                                 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -249,11 +275,9 @@
 
                     <div class="col-lg-6">
                         <section class="panel">
-                            <header class="panel-heading">
-                                Basic Forms
-                            </header>
                             <div class="panel-body">
-
+                                <div id="chartContainer1" style="height: 450px; width: 100%;"></div>
+                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                             </div>
                         </section>
                     </div>
@@ -310,7 +334,7 @@
         <!--footer start-->
         <footer class="site-footer">
             <div class="text-center">
-                2018 &copy; Fuzzy Logic by Mehmet ÖZÇELİK & Fatih KARAÜZÜM               
+                2019 &copy; Fuzzy Logic by Mehmet ÖZÇELİK & Fatih KARAÜZÜM               
             </div>
         </footer>
         <!--footer end-->

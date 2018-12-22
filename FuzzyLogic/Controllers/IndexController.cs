@@ -45,6 +45,39 @@ namespace FuzzyLogic.Controllers
             ViewBag.DataPoints4 = JsonConvert.SerializeObject(dataPoints4);
             ViewBag.DataPoints5 = JsonConvert.SerializeObject(dataPoints5);
 
+            List<DataPoint> dataPoints6 = new List<DataPoint>();
+            List<DataPoint> dataPoints7 = new List<DataPoint>();
+            List<DataPoint> dataPoints8 = new List<DataPoint>();
+            List<DataPoint> dataPoints9 = new List<DataPoint>();
+            List<DataPoint> dataPoints10 = new List<DataPoint>();
+
+            dataPoints6.Add(new DataPoint(0, 1));
+            dataPoints6.Add(new DataPoint(0.5, 1));
+            dataPoints6.Add(new DataPoint(1, 0));
+
+            dataPoints7.Add(new DataPoint(0.5, 0));
+            dataPoints7.Add(new DataPoint(1.25, 1));
+            dataPoints7.Add(new DataPoint(2, 0));
+
+            dataPoints8.Add(new DataPoint(1.5, 0));
+            dataPoints8.Add(new DataPoint(2.5, 1));
+            dataPoints8.Add(new DataPoint(3.5, 0));
+
+            dataPoints9.Add(new DataPoint(3, 0));
+            dataPoints9.Add(new DataPoint(3.75, 1));
+            dataPoints9.Add(new DataPoint(4.5, 0));
+
+            dataPoints10.Add(new DataPoint(4, 0));
+            dataPoints10.Add(new DataPoint(4.5, 1));
+            dataPoints10.Add(new DataPoint(5, 1));
+
+            ViewBag.DataPoints6 = JsonConvert.SerializeObject(dataPoints6);
+            ViewBag.DataPoints7 = JsonConvert.SerializeObject(dataPoints7);
+            ViewBag.DataPoints8 = JsonConvert.SerializeObject(dataPoints8);
+            ViewBag.DataPoints9 = JsonConvert.SerializeObject(dataPoints9);
+            ViewBag.DataPoints10 = JsonConvert.SerializeObject(dataPoints10);
+            ViewBag.DataPoints5 = JsonConvert.SerializeObject(dataPoints5);
+
             //Rezistans
             List<DataPoint> dataPoints11 = new List<DataPoint>();
             List<DataPoint> dataPoints12 = new List<DataPoint>();
