@@ -116,16 +116,14 @@ namespace FuzzyLogic.Controllers
         public ActionResult index1(double x, double y)
         {
             islem nesne = new islem();
-            try
-            {
+            
+            
+                var k = nesne.hesapla(x);
+                var l = nesne.hesapla2(y);
 
-                int k, l;
-                k = nesne.hesapla(x);
-                l = nesne.hesapla2(y);
-
-                nesne.yukle();
-                nesne.cikarim(k, l);
-                double sonuc = nesne.durulastirma(k, l);
+                var tablo = nesne.yukle();
+                var rezistansSonuc = nesne.cikarim(k, l, tablo);
+                double sonuc = nesne.durulastirma(rezistansSonuc);
                 if (sonuc == 404)
                 {
                     TempData["Hata"] = "Çıkışta Hareket Yok";
@@ -135,13 +133,9 @@ namespace FuzzyLogic.Controllers
                     TempData["Hata"] = sonuc;
                 }
 
-            }
-            catch
-            {
-                TempData["Hata"] = "Kriterlere uygun değerler giriniz";
-            }
+            
+            
 
-            ViewBag.tablo = nesne.tablo;
             return RedirectToAction("Index");
         }
     }

@@ -2,306 +2,383 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FuzzyLogic.Models;
 
 namespace FuzzyLogic.Controllers
 {
+    public class RezistansSonuc
+    {
+        public string RSeviye { get; set; }
+        public string RSicaklik { get; set; }
+        public string RUyelik { get; set; }
+        public double RDerece { get; set; }
+    }
+
+    public class DuruSonuc
+    {
+        public double duruSonuc { get; set; }
+    }
     public class islem
     {
-        public double[,] dizi1 = new double[2, 2];
-        public double[,] dizi2 = new double[2, 2];
-        public string[,] tablo = new string[5, 5];
-        public string[,] rezistan = new string[2, 2];
-        public string[,] rezistan_sonuc = new string[2, 2];
-        public double[,] duru_sonuc = new double[2, 4];
-        public int i;
-        public int y;
+        static int i;
+        static int y;
         public int m;
         double pay = 0;
         double payda = 0;
 
         /*Sıcaklık Hesaplama*/
-        public int hesapla(double x)
+        public List<Sicaklik> hesapla(double x)
         {
-            int i = 0;
+            List<Sicaklik> Sicaklik = new List<Sicaklik>();
+            Sicaklik nesne = new Sicaklik();
+
+            double derece = 0;
+            i=0;
             /* çok düşük sıcaklık*/
             if (0 <= x && x <= 20)
-            {
-                dizi1[i, 0] = 0;
+            { 
                 if (0 <= x && x <= 10)
                 {
-                    dizi1[i, 1] = 1;
+                    derece = 1;
                 }
                 if (10 < x && x <= 20)
                 {
-                    dizi1[i, 1] = (20 - x) / 10;
+                    derece = (20 - x) / 10;
                 }
+
                 i++;
+                nesne.Uyelik = "Çok Düşük";
+                nesne.Derece = derece;
+                Sicaklik.Add(nesne);
             }
             /* düşük sıcaklık*/
             if (15 <= x && x <= 40)
             {
-                dizi1[i, 0] = 1;
-
+                nesne = new Sicaklik();
                 if (15 <= x && x < 27.5)
                 {
-                    dizi1[i, 1] = (x - 15) / 12.5;
+                    derece = (x - 15) / 12.5;
                 }
                 if (27.5 <= x && x <= 40)
                 {
-                    dizi1[i, 1] = (40 - x) / 12.5;
+                    derece = (40 - x) / 12.5;
                 }
+
                 i++;
+                nesne.Uyelik = "Düşük";
+                nesne.Derece = derece;
+                Sicaklik.Add(nesne);
             }
             /* orta sıcaklık*/
             if (35 <= x && x <= 60)
             {
-                dizi1[i, 0] = 2;
-
+                nesne = new Sicaklik();
                 if (35 <= x && x < 47.5)
                 {
-                    dizi1[i, 1] = (x - 35) / 12.5;
+                    derece = (x - 35) / 12.5;
                 }
                 if (47.5 <= x && x <= 60)
                 {
-                    dizi1[i, 1] = (60 - x) / 12.5;
+                    derece = (60 - x) / 12.5;
                 }
+
                 i++;
+                nesne.Uyelik = "Orta";
+                nesne.Derece = derece;
+                Sicaklik.Add(nesne);
             }
             /* yüksek sıcaklık*/
             if (55 <= x && x <= 80)
             {
-                dizi1[i, 0] = 3;
-
+                nesne = new Sicaklik();
                 if (55 <= x && x < 67.5)
                 {
-                    dizi1[i, 1] = (x - 55) / 12.5;
+                    derece = (x - 55) / 12.5;
                 }
                 if (67.5 <= x && x <= 80)
                 {
-                    dizi1[i, 1] = (80 - x) / 12.5;
+                    derece = (80 - x) / 12.5;
                 }
+
                 i++;
+                nesne.Uyelik = "Yüksek";
+                nesne.Derece = derece;
+                Sicaklik.Add(nesne);
             }
             /* çok yüksek sıcaklık*/
             if (75 <= x && x <= 100)
             {
-                dizi1[i, 0] = 4;
-
+                nesne = new Sicaklik();
                 if (75 <= x && x < 87.5)
                 {
-                    dizi1[i, 1] = (x - 75) / 12.5;
+                    derece = (x - 75) / 12.5;
                 }
                 if (87.5 <= x && x <= 100)
                 {
-                    dizi1[i, 1] = (100 - x) / 12.5;
+                    derece = (100 - x) / 12.5;
                 }
+
                 i++;
+                nesne.Uyelik = "Çok Yüksek";
+                nesne.Derece = derece;
+                Sicaklik.Add(nesne);
             }
-            return i;
+
+            return Sicaklik;
         }
         /* Seviye Hesaplama*/
-        public int hesapla2(double x)
+        public List<Seviye> hesapla2(double x)
         {
-            int y = 0;
+            List<Models.Seviye> Seviye = new List<Seviye>();
+            Seviye nesne = new Seviye();
+            double derece = 0;
+            y = 0;
             /* çok düşük seviye*/
             if (0 <= x && x <= 1)
             {
-                dizi2[y, 0] = 0;
                 if (0 <= x && x <= 0.5)
                 {
-                    dizi2[y, 1] = 1;
+                    derece = 1;
                 }
                 if (0.5 < x && x <= 1)
                 {
-                    dizi2[y, 1] = (1 - x) / 0.5;
+                    derece = (1 - x) / 0.5;
                 }
+
                 y++;
+                nesne.Uyelik = "Çok Düşük";
+                nesne.Derece = derece;
+                Seviye.Add(nesne);
             }
             /* düşük seviye*/
             if (0.5 <= x && x <= 2)
             {
-                dizi2[y, 0] = 1;
-
+                nesne = new Seviye();
                 if (0.5 <= x && x < 1.25)
                 {
-                    dizi2[y, 1] = (x - 0.5) / 0.75;
+                    derece = (x - 0.5) / 0.75;
                 }
                 if (1.25 <= x && x <= 2)
                 {
-                    dizi2[y, 1] = (2 - x) / 0.75;
+                    derece = (2 - x) / 0.75;
                 }
+
                 y++;
+                nesne.Uyelik = "Düşük";
+                nesne.Derece = derece;
+                Seviye.Add(nesne);
             }
             /* orta seviye*/
             if (1.5 <= x && x <= 3.5)
             {
-                dizi2[y, 0] = 2;
-
+                nesne = new Seviye();
                 if (1.5 <= x && x < 2.5)
                 {
-                    dizi2[y, 1] = (x - 1.5);
+                    derece = (x - 1.5);
                 }
                 if (2.5 <= x && x <= 3.5)
                 {
-                    dizi2[y, 1] = (3.5 - x);
+                    derece = (3.5 - x);
                 }
+
                 y++;
+                nesne.Uyelik = "Orta";
+                nesne.Derece = derece;
+                Seviye.Add(nesne);
             }
             /* yüksek seviye*/
             if (3 <= x && x <= 4.5)
             {
-                dizi2[y, 0] = 3;
-
+                nesne = new Seviye();
                 if (3 <= x && x < 3.75)
                 {
-                    dizi2[y, 1] = (x - 3) / 0.75;
+                    derece = (x - 3) / 0.75;
                 }
                 if (3.75 <= x && x <= 4.5)
                 {
-                    dizi2[y, 1] = (4.5 - x) / 0.75;
+                    derece = (4.5 - x) / 0.75;
                 }
+
                 y++;
+                nesne.Uyelik = "Yüksek";
+                nesne.Derece = derece;
+                Seviye.Add(nesne);
             }
             /* çok yüksek seviye*/
             if (4 <= x && x <= 5)
             {
-                dizi2[y, 0] = 4;
-
+                nesne = new Seviye();
                 if (4 <= x && x < 4.5)
                 {
-                    dizi2[y, 1] = (x - 4) / 0.5;
+                    derece = (x - 4) / 0.5;
                 }
                 if (4.5 <= x && x <= 5)
                 {
-                    dizi2[y, 1] = (5 - x) / 0.5;
+                    derece = (5 - x) / 0.5;
                 }
+
                 y++;
+                nesne.Uyelik = "Çok Yüksek";
+                nesne.Derece = derece;
+                Seviye.Add(nesne);
             }
-            return y;
+            return Seviye;
         }
 
         /* Kural Tablosu Oluşturma*/
-        public void yukle()
+        public List<Tablo> yukle()
         {
-            tablo[0, 0] = "Orta";
-            tablo[0, 1] = "Az";
-            tablo[0, 2] = "Çok Az";
-            tablo[0, 3] = "Hareket Yok";
-            tablo[0, 4] = "Hareket Yok";
+            Tablo nesne = new Tablo();
+            List<Tablo> Tablo = new List<Tablo>();
 
-            tablo[1, 0] = "Çok";
-            tablo[1, 1] = "Orta";
-            tablo[1, 2] = "Çok Az";
-            tablo[1, 3] = "Çok Az";
-            tablo[1, 4] = "Hareket Yok";
+            nesne.UyelikSicaklik = "Çok Düşük"; nesne.UyelikSeviye = "Çok Düşük"; nesne.UyelikRezistans = "Orta"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Düşük"; nesne.UyelikSeviye = "Düşük"; nesne.UyelikRezistans = "Çok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Düşük"; nesne.UyelikSeviye = "Orta"; nesne.UyelikRezistans = "Aşırı Çok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Düşük"; nesne.UyelikSeviye = "Yüksek"; nesne.UyelikRezistans = "Aşırı Çok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Düşük"; nesne.UyelikSeviye = "Çok Yüksek"; nesne.UyelikRezistans = "Aşırı Çok"; Tablo.Add(nesne); nesne = new Tablo();
 
-            tablo[2, 0] = "Aşırı Çok";
-            tablo[2, 1] = "Çok";
-            tablo[2, 2] = "Orta";
-            tablo[2, 3] = "Çok Az";
-            tablo[2, 4] = "Hareket Yok";
 
-            tablo[3, 0] = "Aşırı Çok";
-            tablo[3, 1] = "Çok";
-            tablo[3, 2] = "Çok";
-            tablo[3, 3] = "Az";
-            tablo[3, 4] = "Hareket Yok";
+            nesne.UyelikSicaklik = "Düşük"; nesne.UyelikSeviye = "Çok Düşük"; nesne.UyelikRezistans = "Az"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Düşük"; nesne.UyelikSeviye = "Düşük"; nesne.UyelikRezistans = "Orta"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Düşük"; nesne.UyelikSeviye = "Orta"; nesne.UyelikRezistans = "Çok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Düşük"; nesne.UyelikSeviye = "Yüksek"; nesne.UyelikRezistans = "Çok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Düşük"; nesne.UyelikSeviye = "Çok Yüksek"; nesne.UyelikRezistans = "Çok"; Tablo.Add(nesne); nesne = new Tablo();
 
-            tablo[4, 0] = "Aşırı Çok";
-            tablo[4, 1] = "Çok";
-            tablo[4, 2] = "Çok";
-            tablo[4, 3] = "Orta";
-            tablo[4, 4] = "Hareket Yok";
+            nesne = new Tablo();
+            nesne.UyelikSicaklik = "Orta"; nesne.UyelikSeviye = "Çok Düşük"; nesne.UyelikRezistans = "Çok Az"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Orta"; nesne.UyelikSeviye = "Düşük"; nesne.UyelikRezistans = "Çok Az"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Orta"; nesne.UyelikSeviye = "Orta"; nesne.UyelikRezistans = "Orta"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Orta"; nesne.UyelikSeviye = "Yüksek"; nesne.UyelikRezistans = "Çok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Orta"; nesne.UyelikSeviye = "Çok Yüksek"; nesne.UyelikRezistans = "Çok"; Tablo.Add(nesne); nesne = new Tablo();
+
+            nesne = new Tablo();
+            nesne.UyelikSicaklik = "Yüksek"; nesne.UyelikSeviye = "Çok Düşük"; nesne.UyelikRezistans = "Çıkışta Hareket Yok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Yüksek"; nesne.UyelikSeviye = "Düşük"; nesne.UyelikRezistans = "Çok Az"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Yüksek"; nesne.UyelikSeviye = "Orta"; nesne.UyelikRezistans = "Çok Az"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Yüksek"; nesne.UyelikSeviye = "Yüksek"; nesne.UyelikRezistans = "Az"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Yüksek"; nesne.UyelikSeviye = "Çok Yüksek"; nesne.UyelikRezistans = "Orta"; Tablo.Add(nesne); nesne = new Tablo();
+
+            nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Yüksek"; nesne.UyelikSeviye = "Çok Düşük"; nesne.UyelikRezistans = "Çıkışta Hareket Yok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Yüksek"; nesne.UyelikSeviye = "Düşük"; nesne.UyelikRezistans = "Çıkışta Hareket Yok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Yüksek"; nesne.UyelikSeviye = "Orta"; nesne.UyelikRezistans = "Çıkışta Hareket Yok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Yüksek"; nesne.UyelikSeviye = "Yüksek"; nesne.UyelikRezistans = "Çıkışta Hareket Yok"; Tablo.Add(nesne); nesne = new Tablo();
+            nesne.UyelikSicaklik = "Çok Yüksek"; nesne.UyelikSeviye = "Çok Yüksek"; nesne.UyelikRezistans = "Çıkışta Hareket Yok"; Tablo.Add(nesne);
+
+            return Tablo;
         }
+
         /*Bulanık Çıkarım Kurallarını Yazdırma*/
-        public void cikarim(int k, int l)
+        public List<RezistansSonuc> cikarim(List<Sicaklik> k, List<Seviye> l, List<Tablo> Tablo)
         {
-            for (int a = 0; a < k; a++)
+            Controllers.RezistansSonuc nesne = new RezistansSonuc();
+            var RezistansSonuc = new List<RezistansSonuc>();
+            int sayac = 0;
+
+            foreach (var item in Tablo)
             {
-                for (int j = 0; j < l; j++)
+                foreach (var iscaklik in k)
                 {
-                    int don1 = Convert.ToInt32(dizi1[a, 0]);
-                    int don2 = Convert.ToInt32(dizi2[j, 0]);
-                    double don3 = Convert.ToDouble(dizi1[a, 1]);
-                    double don4 = Convert.ToDouble(dizi2[j, 1]);
-
-                    if (don3 > don4)
+                    foreach (var esviye in l)
                     {
-                        rezistan_sonuc[a, j] = don4.ToString();
-                    }
-                    else
-                    {
-                        rezistan_sonuc[a, j] = don3.ToString();
-                    }
+                        nesne = new RezistansSonuc();
+                        if (item.UyelikSicaklik == iscaklik.Uyelik && item.UyelikSeviye == esviye.Uyelik)
+                        {
+                            nesne.RSicaklik = item.UyelikSicaklik;
+                            nesne.RSeviye = item.UyelikSeviye;
+                            nesne.RUyelik = item.UyelikRezistans;
 
-                    rezistan[a, j] = tablo[don2, don1];
-                }
+                            if (iscaklik.Derece < esviye.Derece)
+                            {
+                                nesne.RDerece = iscaklik.Derece;
+                            }
+                            else
+                            {
+                                nesne.RDerece = esviye.Derece;
+                            }
+
+                            RezistansSonuc.Add(nesne);
+                        }
+                    } 
+                } 
             }
+            return RezistansSonuc;
         }
         /* rezistans üyelik derecesi bulma*/
-        public double durulastirma(int k, int l)
+        public double durulastirma(List<RezistansSonuc> RezistansSonuc)
         {
-            for (int z = 0; z < 1; z++)
+            Controllers.DuruSonuc nesne = new DuruSonuc();
+            var DuruSonuc = new List<DuruSonuc>();
+
+            foreach (var item in RezistansSonuc)
             {
-                m = z;
-                for (int a = 0; a < k; a++)
+                double cvr = item.RDerece;
+                if (item.RUyelik == "Çok Az")
                 {
-                    for (int j = 0; j < l; j++)
-                    {
-                        double cvr = Convert.ToDouble(rezistan_sonuc[a, j]);
-                        if (rezistan[a, j] == "Çok Az")
-                        {
-                            duru_sonuc[0, m] = 1;
-                            pay = pay + cvr * duru_sonuc[0, m];
-                            payda = payda + cvr;
-                            duru_sonuc[1, m] = 1 - cvr * 0.5;
-                            pay = pay + cvr * duru_sonuc[1, m];
-                            payda = payda + cvr;
-                            m++;
-                        }
-                        if (rezistan[a, j] == "Az")
-                        {
-                            duru_sonuc[0, m] = cvr * 0.75 + 0.5;
-                            pay = pay + cvr * duru_sonuc[0, m];
-                            payda = payda + cvr;
-                            duru_sonuc[1, m] = 2 - cvr * 0.75;
-                            pay = pay + cvr * duru_sonuc[1, m];
-                            payda = payda + cvr;
-                            m++;
-                        }
-                        if (rezistan[a, j] == "Orta")
-                        {
-                            duru_sonuc[0, m] = cvr * 1 + 1.5;
-                            pay = pay + cvr * duru_sonuc[0, m];
-                            payda = payda + cvr;
-                            duru_sonuc[1, m] = 3.5 - cvr * 1;
-                            pay = pay + cvr * duru_sonuc[1, m];
-                            payda = payda + cvr;
-                            m++;
-                        }
-                        if (rezistan[a, j] == "Çok")
-                        {
-                            duru_sonuc[0, m] = cvr * 0.75 + 3;
-                            pay = pay + cvr * duru_sonuc[0, m];
-                            payda = payda + cvr;
-                            duru_sonuc[1, m] = 4.5 - cvr * 0.75;
-                            pay = pay + cvr * duru_sonuc[1, m];
-                            payda = payda + cvr;
-                            m++;
-                        }
-                        if (rezistan[a, j] == "Aşırı Çok")
-                        {
-                            duru_sonuc[0, m] = cvr * 0.5 + 4;
-                            pay = pay + cvr * duru_sonuc[0, m];
-                            payda = payda + cvr;
-                            duru_sonuc[1, m] = 1;
-                            pay = pay + cvr * duru_sonuc[1, m];
-                            payda = payda + cvr;
-                            m++;
-                        }
-                    }
+                    nesne = new DuruSonuc();
+                    nesne.duruSonuc = 1 - cvr * 0.5;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+                    DuruSonuc.Add(nesne);
+                    m++;
+                }
+                if (item.RUyelik == "Az")
+                {
+                    nesne = new DuruSonuc();
+                    nesne.duruSonuc = cvr * 0.75 + 0.5;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+                    DuruSonuc.Add(nesne);
+
+                    nesne.duruSonuc = 2 - cvr * 0.75;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+
+                    DuruSonuc.Add(nesne);
+                    m++;
+                }
+                if (item.RUyelik == "Orta")
+                {
+                    nesne = new DuruSonuc();
+                    nesne.duruSonuc = cvr * 1 + 1.5;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+                    DuruSonuc.Add(nesne);
+
+                    nesne.duruSonuc = 3.5 - cvr * 1;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+                    DuruSonuc.Add(nesne);
+
+                    m++;
+                }
+                if (item.RUyelik == "Çok")
+                {
+                    nesne = new DuruSonuc();
+                    nesne.duruSonuc = cvr * 0.75 + 3;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+                    DuruSonuc.Add(nesne);
+
+                    nesne.duruSonuc = 4.5 - cvr * 0.75;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+                    DuruSonuc.Add(nesne);
+
+                    m++;
+                }
+                if (item.RUyelik == "Aşırı Çok")
+                {
+                    nesne = new DuruSonuc();
+                    nesne.duruSonuc = cvr * 0.5 + 4;
+                    pay = pay + cvr * nesne.duruSonuc;
+                    payda = payda + cvr;
+                    DuruSonuc.Add(nesne);
+
+                    m++;
                 }
             }
+
             if (payda == 0)
             {
                 return 404;

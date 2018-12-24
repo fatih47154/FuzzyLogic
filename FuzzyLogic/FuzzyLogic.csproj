@@ -183,6 +183,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\Seviye.cs" />
+    <Compile Include="Models\Sicaklik.cs" />
+    <Compile Include="Models\Tablo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
