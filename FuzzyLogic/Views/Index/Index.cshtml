@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -32,6 +31,7 @@
     <script>
         window.onload = function () {
 
+
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title: {
@@ -41,35 +41,35 @@
                     shared: true
                 },
                 data: [{
-                    type: "line",
-                    name: "Çok Düşük",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints1)
-                }, 
-                {
-                    type: "line",
-                    name: "Düşük",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints2)
-                }, {
-                    type: "line",
-                    name: "Orta",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints3)
-                }, {
-                    type: "line",
-                    name: "Yüksek",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints4)
-                }, {
-                    type: "line",
-                    name: "Çok Yüksek",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints5)
-                }]
+                        type: "line",
+                        name: "Çok Düşük",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints1)
+                    },
+                    {
+                        type: "line",
+                        name: "Düşük",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints2)
+                    }, {
+                        type: "line",
+                        name: "Orta",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints3)
+                    }, {
+                        type: "line",
+                        name: "Yüksek",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints4)
+                    }, {
+                        type: "line",
+                        name: "Çok Yüksek",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints5)
+                    }]
             });
             chart.render();
- 
+
             var chart1 = new CanvasJS.Chart("chartContainer1", {
                 animationEnabled: true,
                 title: {
@@ -83,7 +83,7 @@
                         name: "Çok Düşük",
                         showInLegend: true,
                         dataPoints: @Html.Raw(ViewBag.DataPoints6)
-                    }, 
+                    },
                     {
                         type: "line",
                         name: "Düşük",
@@ -123,27 +123,27 @@
                     shared: true
                 },
                 data: [{
-                    type: "line",
-                    name: "Çok Az",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints11)
-                },
-                {
-                    type: "line",
-                    name: "Az",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints12)
-                }, {
-                    type: "line",
-                    name: "Orta",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints13)
-                }, {
-                    type: "line",
-                    name: "Çok",
-                    showInLegend: true,
-                    dataPoints: @Html.Raw(ViewBag.DataPoints14)
-                },
+                        type: "line",
+                        name: "Çok Az",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints11)
+                    },
+                    {
+                        type: "line",
+                        name: "Az",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints12)
+                    }, {
+                        type: "line",
+                        name: "Orta",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints13)
+                    }, {
+                        type: "line",
+                        name: "Çok",
+                        showInLegend: true,
+                        dataPoints: @Html.Raw(ViewBag.DataPoints14)
+                    },
                     {
                         type: "line",
                         name: "Aşırı Çok",
@@ -152,9 +152,123 @@
                     }]
             });
             chart2.render();
+            
         }
     </script>
+    
+    @if (ViewBag.sicaklikUyelik != null|| ViewBag.sicaklikUyelik1 != null || ViewBag.sicaklikUyelik2 != null || ViewBag.sicaklikUyelik3 != null || ViewBag.sicaklikUyelik4 != null)
+    {<script>
+         function bas() {
+             var chart3 = new CanvasJS.Chart("chartContainer3",
+                 {
+                     title: {
+                         text: "Sicaklik"
+                     },
+                     axisY: {
+                         includeZero: true
+                     },
+                     axisX: {
+                         includeZero: true
+                     },
+                     toolTip: {
+                         shared: true
+                     },
+                     data: [
+                         {
+                             type: "line",
+                             name: "Çok Az",
+                             showInLegend: true,
+                             dataPoints: @Html.Raw(ViewBag.sicaklikUyelik)
+                         },
+                         {
+                             type: "line",
+                             name: "Az",
+                             showInLegend: true,
+                             dataPoints: @Html.Raw(ViewBag.sicaklikUyelik1)
+                         }, {
+                             type: "line",
+                             name: "Orta",
+                             showInLegend: true,
+                             dataPoints: @Html.Raw(ViewBag.sicaklikUyelik2)
+                         }, {
+                             type: "line",
+                             name: "Çok",
+                             showInLegend: true,
+                             dataPoints: @Html.Raw(ViewBag.sicaklikUyelik3)
+                         },
+                         {
+                             type: "line",
+                             name: "Aşırı Çok",
+                             showInLegend: true,
+                             dataPoints: @Html.Raw(ViewBag.sicaklikUyelik4)
+                         }
+                     ]
+                 });
 
+             chart3.render();
+         }
+     </script>
+         }
+        
+            
+    @if (ViewBag.seviyeUyelik != null|| ViewBag.seviyeUyelik1 != null || ViewBag.seviyeUyelik2 != null || ViewBag.seviyeUyelik3 != null || ViewBag.seviyeUyelik4 != null)
+        {<script>
+             function bas1() {
+
+
+                 var chart4 = new CanvasJS.Chart("chartContainer4",
+                     {
+                         title: {
+                             text: "Seviye"
+                         },
+                         axisY: {
+                             includeZero: true
+                         },
+                         axisX: {
+                             includeZero: true
+                         },
+                         toolTip: {
+                             shared: true
+                         },
+                         data: [
+                             {
+                                 type: "line",
+                                 name: "Çok Az",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.seviyeUyelik)
+                             },
+                             {
+                                 type: "line",
+                                 name: "Az",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.seviyeUyelik1)
+                             }, {
+                                 type: "line",
+                                 name: "Orta",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.seviyeUyelik2)
+                             }, {
+                                 type: "line",
+                                 name: "Çok",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.seviyeUyelik3)
+                             },
+                             {
+                                 type: "line",
+                                 name: "Aşırı Çok",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.seviyeUyelik4)
+                             }
+                         ]
+                     });
+
+                 chart4.render();
+
+             }
+
+
+         </script>}
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -174,15 +288,9 @@
     <link href="/Content/css/style.css" rel="stylesheet">
     <link href="/Content/css/style-responsive.css" rel="stylesheet"/>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-        <script src="/Content/js/html5shiv.js"></script>
-        <script src="/Content/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
-
     <section>
         <!--header start-->
         <header class="header white-bg">
@@ -302,10 +410,10 @@
                             <div class="panel-body">
                                 @if (TempData["Hata"] != null)
                                 {
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    <strong>@TempData["Hata"]</strong>
-                                </div>
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>@TempData["Hata"]</strong>
+                                    </div>
                                 }
 
                                 <form role="form" action="Index1">
@@ -320,12 +428,53 @@
                                     </div>
                                     
                                     <button type="submit" class="btn btn-info">Sorgula</button>
+                                    
                                 </form>
-
+                                <button type="button" onclick="bas()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Sıcaklık Göster
+                                </button>
+                                <button type="button" onclick="bas1()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                                    Seviye Göster
+                                </button>
                             </div>
                         </section>
                     </div>
                 </div>
+                
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel1"><b>Sıcaklik</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="chartContainer3" style="height: 450px; margin-left: 5%; margin-bottom: -8%;"></div>
+                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel"><b>Seviye</b></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="chartContainer4" style="height: 450px; margin-left: 5%; margin-bottom: -8%;"></div>
+                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary1" data-dismiss="modal">Kapat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </section>
 
