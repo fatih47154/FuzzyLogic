@@ -12,8 +12,15 @@ namespace FuzzyLogic.Controllers
         public string RSicaklik { get; set; }
         public string RUyelik { get; set; }
         public double RDerece { get; set; }
+        public double RSicaklikDerece { get; set; }
+        public double RSeviyeDerece { get; set; }
     }
 
+    public class DuruSonucX
+    {
+        public Double DuruSonuc { get; set; }
+        public List<Double> XList { get; set; }
+    }
     public class DuruSonuc
     {
         public double duruSonuc { get; set; }
@@ -287,6 +294,8 @@ namespace FuzzyLogic.Controllers
                             nesne.RSicaklik = item.UyelikSicaklik;
                             nesne.RSeviye = item.UyelikSeviye;
                             nesne.RUyelik = item.UyelikRezistans;
+                            nesne.RSicaklikDerece = iscaklik.Derece;
+                            nesne.RSeviyeDerece = esviye.Derece;
 
                             if (iscaklik.Derece < esviye.Derece)
                             {
@@ -305,10 +314,12 @@ namespace FuzzyLogic.Controllers
             return RezistansSonuc;
         }
         /* rezistans üyelik derecesi bulma*/
-        public double durulastirma(List<RezistansSonuc> RezistansSonuc)
+        public DuruSonucX durulastirma(List<RezistansSonuc> RezistansSonuc)
         {
             Controllers.DuruSonuc nesne = new DuruSonuc();
             var DuruSonuc = new List<DuruSonuc>();
+            DuruSonucX sonucNesne = new DuruSonucX();
+            sonucNesne.XList = new List<double>();
 
             foreach (var item in RezistansSonuc)
             {
@@ -319,7 +330,7 @@ namespace FuzzyLogic.Controllers
                     nesne.duruSonuc = 1 - cvr * 0.5;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
                     m++;
                 }
                 if (item.RUyelik == "Az")
@@ -328,13 +339,13 @@ namespace FuzzyLogic.Controllers
                     nesne.duruSonuc = cvr * 0.75 + 0.5;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
 
                     nesne.duruSonuc = 2 - cvr * 0.75;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
 
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
                     m++;
                 }
                 if (item.RUyelik == "Orta")
@@ -343,12 +354,12 @@ namespace FuzzyLogic.Controllers
                     nesne.duruSonuc = cvr * 1 + 1.5;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
 
                     nesne.duruSonuc = 3.5 - cvr * 1;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
 
                     m++;
                 }
@@ -358,12 +369,12 @@ namespace FuzzyLogic.Controllers
                     nesne.duruSonuc = cvr * 0.75 + 3;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
 
                     nesne.duruSonuc = 4.5 - cvr * 0.75;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
 
                     m++;
                 }
@@ -373,19 +384,22 @@ namespace FuzzyLogic.Controllers
                     nesne.duruSonuc = cvr * 0.5 + 4;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
-                    DuruSonuc.Add(nesne);
+                    sonucNesne.XList.Add(nesne.duruSonuc);
 
                     m++;
                 }
             }
 
+            sonucNesne.DuruSonuc = pay / payda;
+
             if (payda == 0)
             {
-                return 404;
+                sonucNesne.DuruSonuc = -999;
+                return sonucNesne;
             }
             else
             {
-                return pay / payda;
+                return sonucNesne;
             }
         }
     }

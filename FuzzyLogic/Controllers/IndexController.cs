@@ -10,6 +10,9 @@ namespace FuzzyLogic.Controllers
 {
     public class IndexController : Controller
     {
+        private static List<RezistansSonuc> rezistansSonucs;
+        private static DuruSonucX duruSonuc;
+
         // GET: Index
         public ActionResult Index()
         {
@@ -190,64 +193,55 @@ namespace FuzzyLogic.Controllers
             List<DataPoint> seviyeUyelik2 = new List<DataPoint>();
             List<DataPoint> seviyeUyelik3 = new List<DataPoint>();
             List<DataPoint> seviyeUyelik4 = new List<DataPoint>();
-
+            seviyeUyelik4.Add(new DataPoint(4, 0));
             if (TempData["seviye"] != null)
             {
                 y = Convert.ToDouble(TempData["seviye"]);
 
-                if (0 <= y && y <= 20)
+                if (0 <= y && y <= 1)
                 {
-
                     seviyeUyelik.Add(new DataPoint(0, 1));
-                    seviyeUyelik.Add(new DataPoint(10, 1));
-                    seviyeUyelik.Add(new DataPoint(20, 0));
+                    seviyeUyelik.Add(new DataPoint(0.5, 1));
+                    seviyeUyelik.Add(new DataPoint(1, 0));
 
                 }
                 /* düşük sıcaklık*/
-                if (15 <= y && y <= 40)
+                if (0.5 <= y && y <= 2)
                 {
-
-                    seviyeUyelik1.Add(new DataPoint(15, 0));
-                    seviyeUyelik1.Add(new DataPoint(27.5, 1));
-                    seviyeUyelik1.Add(new DataPoint(40, 0));
+                    seviyeUyelik1.Add(new DataPoint(0.5, 0));
+                    seviyeUyelik1.Add(new DataPoint(1.25, 1));
+                    seviyeUyelik1.Add(new DataPoint(2, 0));
 
                 }
                 /* orta sıcaklık*/
-                if (35 <= y && y <= 60)
+                if (1.5 <= y && y <= 3.5)
                 {
-
-                    seviyeUyelik2.Add(new DataPoint(35, 0));
-                    seviyeUyelik2.Add(new DataPoint(47.5, 1));
-                    seviyeUyelik2.Add(new DataPoint(60, 0));
+                    seviyeUyelik2.Add(new DataPoint(1.5, 0));
+                    seviyeUyelik2.Add(new DataPoint(2.5, 1));
+                    seviyeUyelik2.Add(new DataPoint(3.5, 0));
 
                 }
                 /* yüksek sıcaklık*/
-                if (55 <= y && y <= 80)
+                if (3 <= y && y <= 4.5)
                 {
-
-                    seviyeUyelik3.Add(new DataPoint(55, 0));
-                    seviyeUyelik3.Add(new DataPoint(67.5, 1));
-                    seviyeUyelik3.Add(new DataPoint(80, 0));
-
-
+                    seviyeUyelik3.Add(new DataPoint(3, 0));
+                    seviyeUyelik3.Add(new DataPoint(3.75, 1));
+                    seviyeUyelik3.Add(new DataPoint(4.5, 0));
                 }
                 /* çok yüksek sıcaklık*/
-                if (75 <= y && y <= 100)
+                if (4 <= y && y <= 5)
                 {
-
-                    seviyeUyelik4.Add(new DataPoint(75, 0));
-                    seviyeUyelik4.Add(new DataPoint(87.5, 1));
-                    seviyeUyelik4.Add(new DataPoint(100, 1));
-
-
+                    seviyeUyelik4.Add(new DataPoint(4, 0));
+                    seviyeUyelik4.Add(new DataPoint(4.5, 1));
+                    seviyeUyelik4.Add(new DataPoint(5, 1));
                 }
             }
 
-            seviyeUyelik.Add(new DataPoint(20, 0));
-            seviyeUyelik1.Add(new DataPoint(40, 0));
-            seviyeUyelik2.Add(new DataPoint(60, 0));
-            seviyeUyelik3.Add(new DataPoint(80, 0));
-            seviyeUyelik4.Add(new DataPoint(100, 0));
+            seviyeUyelik.Add(new DataPoint(1, 0));
+            seviyeUyelik1.Add(new DataPoint(2, 0));
+            seviyeUyelik2.Add(new DataPoint(3.5, 0));
+            seviyeUyelik3.Add(new DataPoint(4.5, 0));
+            
 
             ViewBag.seviyeUyelik = JsonConvert.SerializeObject(seviyeUyelik);
             ViewBag.seviyeUyelik1 = JsonConvert.SerializeObject(seviyeUyelik1);
@@ -255,6 +249,74 @@ namespace FuzzyLogic.Controllers
             ViewBag.seviyeUyelik3 = JsonConvert.SerializeObject(seviyeUyelik3);
             ViewBag.seviyeUyelik4 = JsonConvert.SerializeObject(seviyeUyelik4);
 
+            List<DataPoint> rezistansUyelik = new List<DataPoint>();
+            List<DataPoint> rezistansUyelik1 = new List<DataPoint>();
+            List<DataPoint> rezistansUyelik2 = new List<DataPoint>();
+            List<DataPoint> rezistansUyelik3 = new List<DataPoint>();
+            List<DataPoint> rezistansUyelik4 = new List<DataPoint>();
+            rezistansUyelik4.Add(new DataPoint(4, 0));
+            if (rezistansSonucs != null)
+            {
+                foreach (var item in duruSonuc.XList)
+                {
+                    if (0 <= item && item <= 1)
+                    {
+                        rezistansUyelik.Add(new DataPoint(0, 1));
+                        rezistansUyelik.Add(new DataPoint(0.5, 1));
+                        rezistansUyelik.Add(new DataPoint(1, 0));
+
+                    }
+                    /* düşük sıcaklık*/
+                    if (0.5 <= item && item <= 2)
+                    {
+                        rezistansUyelik1.Add(new DataPoint(0.5, 0));
+                        rezistansUyelik1.Add(new DataPoint(1.25, 1));
+                        rezistansUyelik1.Add(new DataPoint(2, 0));
+
+                    }
+                    /* orta sıcaklık*/
+                    if (1.5 <= item && item <= 3.5)
+                    {
+                        rezistansUyelik2.Add(new DataPoint(1.5, 0));
+                        rezistansUyelik2.Add(new DataPoint(2.5, 1));
+                        rezistansUyelik2.Add(new DataPoint(3.5, 0));
+
+                    }
+                    /* yüksek sıcaklık*/
+                    if (3 <= item && item <= 4.5)
+                    {
+                        rezistansUyelik3.Add(new DataPoint(3, 0));
+                        rezistansUyelik3.Add(new DataPoint(3.75, 1));
+                        rezistansUyelik3.Add(new DataPoint(4.5, 0));
+                    }
+                    /* çok yüksek sıcaklık*/
+                    if (4 <= item && item <= 5)
+                    {
+                        rezistansUyelik4.Add(new DataPoint(4, 0));
+                        rezistansUyelik4.Add(new DataPoint(4.5, 1));
+                        rezistansUyelik4.Add(new DataPoint(5, 1));
+                    }
+                } 
+            }
+
+            rezistansUyelik.Add(new DataPoint(1, 0));
+            rezistansUyelik1.Add(new DataPoint(2, 0));
+            rezistansUyelik2.Add(new DataPoint(3.5, 0));
+            rezistansUyelik3.Add(new DataPoint(4.5, 0));
+            
+
+            ViewBag.rezistansUyelik = JsonConvert.SerializeObject(rezistansUyelik);
+            ViewBag.rezistansUyelik1 = JsonConvert.SerializeObject(rezistansUyelik1);
+            ViewBag.rezistansUyelik2 = JsonConvert.SerializeObject(rezistansUyelik2);
+            ViewBag.rezistansUyelik3 = JsonConvert.SerializeObject(rezistansUyelik3);
+            ViewBag.rezistansUyelik4 = JsonConvert.SerializeObject(rezistansUyelik4);
+
+            ViewBag.rezistansSonuc = rezistansSonucs;
+
+            if (duruSonuc != null)
+            {
+                ViewBag.xler = duruSonuc.XList;
+            }
 
             return View();
         }
@@ -270,16 +332,18 @@ namespace FuzzyLogic.Controllers
 
                 var tablo = nesne.yukle();
                 var rezistansSonuc = nesne.cikarim(k, l, tablo);
-                double sonuc = nesne.durulastirma(rezistansSonuc);
-                if (sonuc == 404)
+                DuruSonucX sonuc = nesne.durulastirma(rezistansSonuc);
+                if (sonuc.DuruSonuc == -999)
                 {
                     TempData["Hata"] = "Çıkışta Hareket Yok";
                 }
                 else
                 {
-                    TempData["Hata"] = sonuc;
-                }           
+                    TempData["Hata"] = sonuc.DuruSonuc;
+                }
 
+            duruSonuc = sonuc;
+            rezistansSonucs = rezistansSonuc;
             return RedirectToAction("Index");
         }
     }

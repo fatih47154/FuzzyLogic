@@ -269,6 +269,65 @@
 
          </script>}
     
+    @if (ViewBag.rezistansUyelik != null || ViewBag.rezistansUyelik1 != null || ViewBag.rezistansUyelik2 != null || ViewBag.rezistansUyelik3 != null || ViewBag.rezistansUyelik4 != null)
+    {
+    <script>
+             function bas2() {
+
+
+                 var chart5 = new CanvasJS.Chart("chartContainer5",
+                     {
+                         title: {
+                             text: "Rezistans"
+                         },
+                         axisY: {
+                             includeZero: true
+                         },
+                         axisX: {
+                             includeZero: true
+                         },
+                         toolTip: {
+                             shared: true
+                         },
+                         data: [
+                             {
+                                 type: "line",
+                                 name: "Çok Az",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.rezistansUyelik)
+                             },
+                             {
+                                 type: "line",
+                                 name: "Az",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.rezistansUyelik1)
+                             }, {
+                                 type: "line",
+                                 name: "Orta",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.rezistansUyelik2)
+                             }, {
+                                 type: "line",
+                                 name: "Çok",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.rezistansUyelik3)
+                             },
+                             {
+                                 type: "line",
+                                 name: "Aşırı Çok",
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.rezistansUyelik4)
+                             }
+                         ]
+                     });
+
+                 chart5.render();
+
+             }
+
+
+    </script>}
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -301,187 +360,264 @@
         </header>
         
         <section>
-            <section class="wrapper">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                               <h4> Bulanık Kural Tabanı</h4>
-                            </header>
-                            <div class="panel-body">
-                                <section>
-                                    <table class="table table-bordered table-striped table-condensed ortala">
-                                        <thead>
-                                        <tr>
-                                            <th style="border-right-width: 3px; background-color:#339966">Seviye\Sıcaklık</th>
-                                            <th style="border-bottom-width: 3px">Çok Düşük</th>
-                                            <th style="border-bottom-width: 3px">Düşük</th>
-                                            <th style="border-bottom-width: 3px">Orta</th>
-                                            <th style="border-bottom-width: 3px">Yüksek</th>
-                                            <th style="border-bottom-width: 3px">Çok Yüksek</th>                                            
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th style="border-right-width: 3px; background-color:#8585ad">Çok Düşük</th>
-                                                <td class="numeric">Orta</td>
-                                                <td class="numeric">Az</td>
-                                                <td class="numeric">Çok Az</td>
-                                                <td class="numeric">Çıkışta hareket yok</td>
-                                                <td class="numeric">Çıkışta hareket yok</td>                                                
-                                             </tr>                                            
-                                            <tr>
-                                                <th style="border-right-width: 3px; background-color:#8585ad">Düşük</th>
-                                                <td class="numeric">Çok</td>
-                                                <td class="numeric">Orta</td>
-                                                <td class="numeric">Çok Az</td>
-                                                <td class="numeric">Çok Az</td>
-                                                <td class="numeric">Çıkışta hareket yok</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="border-right-width: 3px; background-color:#8585ad">Orta</th>
-                                                <td class="numeric">Aşırı Çok</td>
-                                                <td class="numeric">Çok</td>
-                                                <td class="numeric">Orta</td>
-                                                <td class="numeric">Çok Az</td>
-                                                <td class="numeric">Çıkışta hareket yok</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="border-right-width: 3px; background-color:#8585ad">Yüksek</th>
-                                                <td class="numeric">Aşırı Çok</td>
-                                                <td class="numeric">Çok</td>
-                                                <td class="numeric">Çok</td>
-                                                <td class="numeric">Az</td>
-                                                <td class="numeric">Çıkışta hareket yok</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="border-right-width: 3px; background-color:#8585ad">Çok Yüksek</th>
-                                                <td class="numeric">Aşırı Çok</td>
-                                                <td class="numeric">Çok</td>
-                                                <td class="numeric">Çok</td>
-                                                <td class="numeric">Orta</td>
-                                                <td class="numeric">Çıkışta hareket yok</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </section>
-                            </div>
-                        </section>
-                    </div>
-                </div>
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Makine Öğrenmesi - Bulanık Mantık
+                        </header>
+                        <div class="panel-body">
+                            @if (TempData["Hata"] != null)
+                            {
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <strong>Durulaştırma Ağırlık Ortalama : @TempData["Hata"] KΩ</strong>
+                                </div>
+                            }
 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <section class="panel">
-                            
-                            <div class="panel-body">
-                                <div id="chartContainer" style="height: 450px; width: 100%;"></div>
-                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                            </div>
-                        </section>
-                    </div>
+                            <form role="form" action="/Index/Index1">
+                                <div class="form-group">
+                                    <label>Sıcaklık Değerini Giriniz:</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="x" placeholder="Sıcaklık Değerini Giriniz.." required>
+                                </div>
 
-                    <div class="col-lg-6">
-                        <section class="panel">
-                            <div class="panel-body">
-                                <div id="chartContainer1" style="height: 450px; width: 100%;"></div>
-                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                            </div>
+                                <div class="form-group">
+                                    <label>Seviye Değerini Giriniz:</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" name="y" placeholder="Seviye Değerini Giriniz.." required>
+                                </div>
+
+                                <button type="submit" class="btn btn-info">Sorgula</button>
+
+                            </form>
+                            <button type="button" style="width: 19.7%" onclick="bas()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                Sıcaklık Göster
+                            </button>
+                            <button type="button" style="width: 19.8%" onclick="bas1()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1">
+                                Seviye Göster
+                            </button>
+                            <button type="button" style="width: 19.8%" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">
+                                Bulanık Çıkarım Göster
+                            </button>
+                            <button type="button" style="width: 19.8%" class="btn btn-success" data-toggle="modal" data-target="#exampleModal3">
+                                Xler
+                            </button>
+                            <button type="button" style="width: 19.8%" onclick="bas2()" class="btn btn-info" data-toggle="modal" data-target="#exampleModal4">
+                                Son Grafik
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h4> Bulanık Kural Tabanı</h4>
+                    </header>
+                    <div class="panel-body">
+                        <section>
+                            <table class="table table-bordered table-striped table-condensed ortala">
+                                <thead>
+                                <tr>
+                                    <th style="border-right-width: 3px; background-color: #339966">Seviye\Sıcaklık</th>
+                                    <th style="border-bottom-width: 3px">Çok Düşük</th>
+                                    <th style="border-bottom-width: 3px">Düşük</th>
+                                    <th style="border-bottom-width: 3px">Orta</th>
+                                    <th style="border-bottom-width: 3px">Yüksek</th>
+                                    <th style="border-bottom-width: 3px">Çok Yüksek</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th style="border-right-width: 3px; background-color: #8585ad">Çok Düşük</th>
+                                    <td class="numeric">Orta</td>
+                                    <td class="numeric">Az</td>
+                                    <td class="numeric">Çok Az</td>
+                                    <td class="numeric">Çıkışta hareket yok</td>
+                                    <td class="numeric">Çıkışta hareket yok</td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right-width: 3px; background-color: #8585ad">Düşük</th>
+                                    <td class="numeric">Çok</td>
+                                    <td class="numeric">Orta</td>
+                                    <td class="numeric">Çok Az</td>
+                                    <td class="numeric">Çok Az</td>
+                                    <td class="numeric">Çıkışta hareket yok</td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right-width: 3px; background-color: #8585ad">Orta</th>
+                                    <td class="numeric">Aşırı Çok</td>
+                                    <td class="numeric">Çok</td>
+                                    <td class="numeric">Orta</td>
+                                    <td class="numeric">Çok Az</td>
+                                    <td class="numeric">Çıkışta hareket yok</td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right-width: 3px; background-color: #8585ad">Yüksek</th>
+                                    <td class="numeric">Aşırı Çok</td>
+                                    <td class="numeric">Çok</td>
+                                    <td class="numeric">Çok</td>
+                                    <td class="numeric">Az</td>
+                                    <td class="numeric">Çıkışta hareket yok</td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right-width: 3px; background-color: #8585ad">Çok Yüksek</th>
+                                    <td class="numeric">Aşırı Çok</td>
+                                    <td class="numeric">Çok</td>
+                                    <td class="numeric">Çok</td>
+                                    <td class="numeric">Orta</td>
+                                    <td class="numeric">Çıkışta hareket yok</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </section>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">                            
-                            <div class="panel-body">
-                                <div id="chartContainer2" style="height: 450px; width: 80%; margin:auto"></div>
-                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                            </div>
-                        </section>
+                </section>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <section class="panel">
+
+                    <div class="panel-body">
+                        <div id="chartContainer" style="height: 450px; width: 100%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-6">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div id="chartContainer1" style="height: 450px; width: 100%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div id="chartContainer2" style="height: 450px; width: 80%; margin: auto"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel1"><b>Sıcaklik</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="chartContainer3" style="height: 450px; margin-left: 4%; margin-bottom: -8%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
                     </div>
                 </div>
-                
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                Basic Forms
-                            </header>
-                            <div class="panel-body">
-                                @if (TempData["Hata"] != null)
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel"><b>Seviye</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="chartContainer4" style="height: 450px; margin-left: 4%; margin-bottom: -8%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary1" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel2"><b>Bulanık Çıkarım</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align: center">
+                            @if (ViewBag.rezistansSonuc != null)
+                            {
+                                foreach (var item in ViewBag.rezistansSonuc)
                                 {
-                                    <div class="alert alert-danger alert-dismissable">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong>@TempData["Hata"]</strong>
-                                    </div>
+                                    <span style="font-size: 12px">Eğer Sıcaklık <b>@item.RSicaklik - (@item.RSicaklikDerece.ToString("0.##"))</b> , Seviye <b>@item.RSeviye - (@item.RSeviyeDerece.ToString("0.##"))</b> ise Rezistans Çıkışı <b>@item.RUyelik - (@item.RDerece.ToString("0.##"))</b> olur.</span><br/><br/>
                                 }
 
-                                <form role="form" action="Index1">
-                                    <div class="form-group">
-                                        <label>Sıcaklık Değerini Giriniz:</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" name="x" placeholder="Sıcaklık Değerini Giriniz..">
-                                    </div>
+                            }
 
-                                    <div class="form-group">
-                                        <label>Seviye Değerini Giriniz:</label>
-                                        <input type="text" class="form-control" id="exampleInputPassword1" name="y" placeholder="Seviye Değerini Giriniz..">
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-info">Sorgula</button>
-                                    
-                                </form>
-                                <button type="button" onclick="bas()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    Sıcaklık Göster
-                                </button>
-                                <button type="button" onclick="bas1()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
-                                    Seviye Göster
-                                </button>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel1"><b>Sıcaklik</b></h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="chartContainer3" style="height: 450px; margin-left: 5%; margin-bottom: -8%;"></div>
-                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel"><b>Seviye</b></h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="chartContainer4" style="height: 450px; margin-left: 5%; margin-bottom: -8%;"></div>
-                                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary1" data-dismiss="modal">Kapat</button>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary2" data-dismiss="modal">Kapat</button>
                     </div>
                 </div>
+            </div>
+        </div>
 
-            </section>
+        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel3"><b>X'Ler</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        @if (ViewBag.xler != null)
+                        {
+                            foreach (var item in ViewBag.xler)
+                            {
+                                <span>@item</span><br/>
+                            }
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary3" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel4"><b>Son Grafik</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="chartContainer5" style="height: 450px; margin-left: 4%; margin-bottom: -8%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary4" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </section>
         </section>
 
         
         <!--main content end-->
         <!--footer start-->
-        <footer class="site-footer">
+        <footer class="site-footer" style="position: fixed; bottom: 0; width: 100%;">
             <div class="text-center">
                 2019 &copy; Fuzzy Logic by Mehmet ÖZÇELİK & Fatih KARAÜZÜM               
             </div>
