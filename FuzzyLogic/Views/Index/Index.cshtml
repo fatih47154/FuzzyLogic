@@ -328,6 +328,77 @@
 
     </script>}
     
+    @if (ViewBag.sonGrafikUyelik != null)
+    {
+        <script>
+             function bas3() {
+
+
+                 var chart6 = new CanvasJS.Chart("chartContainer6",
+                     {
+                         title: {
+                             text: "Rezistans"
+                         },
+                         axisY: {
+                             includeZero: true
+                         },
+                         axisX: {
+                             includeZero: true
+                         },
+                         toolTip: {
+                             shared: true
+                         },
+                         data: [
+                             {
+                                 type: "area",
+                                 markerBorderThickness: 3,
+                                 color: "maroon",
+                                 fillOpacity: 1,
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.sonGrafikUyelik)
+                             },
+                             {
+                                 type: "area",
+                                 markerBorderThickness: 3,
+                                 color: "maroon",
+                                 fillOpacity: 1,
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.sonGrafikUyelik1)
+                             },
+                             {
+                                 type: "area",
+                                 markerBorderThickness: 3,
+                                 color: "maroon",
+                                 fillOpacity: 1,
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.sonGrafikUyelik2)
+                                 },
+                             {
+                                 type: "area",
+                                 markerBorderThickness: 3,
+                                 color: "maroon",
+                                 fillOpacity: 1,
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.sonGrafikUyelik3)
+                                 },
+                             {
+                                 type: "area",
+                                 markerBorderThickness: 3,
+                                 color: "maroon",
+                                 fillOpacity: 1,
+                                 showInLegend: true,
+                                 dataPoints: @Html.Raw(ViewBag.sonGrafikUyelik4)
+                             }
+                         ]
+                     });
+
+                 chart6.render();
+
+             }
+
+
+        </script>}
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -390,20 +461,23 @@
                                 <button type="submit" class="btn btn-info">Sorgula</button>
 
                             </form>
-                            <button type="button" style="width: 19.7%" onclick="bas()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" style="width: 16.4%" onclick="bas()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                                 Sıcaklık Göster
                             </button>
-                            <button type="button" style="width: 19.8%" onclick="bas1()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1">
+                            <button type="button" style="width: 16.4%" onclick="bas1()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal1">
                                 Seviye Göster
                             </button>
-                            <button type="button" style="width: 19.8%" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">
+                            <button type="button" style="width: 16.4%" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">
                                 Bulanık Çıkarım Göster
                             </button>
-                            <button type="button" style="width: 19.8%" class="btn btn-success" data-toggle="modal" data-target="#exampleModal3">
+                            <button type="button" style="width: 16.4%" class="btn btn-success" data-toggle="modal" data-target="#exampleModal3">
                                 Xler
                             </button>
-                            <button type="button" style="width: 19.8%" onclick="bas2()" class="btn btn-info" data-toggle="modal" data-target="#exampleModal4">
+                            <button type="button" style="width: 16.4%" onclick="bas2()" class="btn btn-info" data-toggle="modal" data-target="#exampleModal4">
                                 Son Grafik
+                            </button>
+                            <button type="button" style="width: 16.4%" onclick="bas3()" class="btn btn-info" data-toggle="modal" data-target="#exampleModal5">
+                                Son Grafik1
                             </button>
                         </div>
                     </section>
@@ -610,6 +684,23 @@
                 </div>
             </div>
         </div>
+        
+            <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel5"><b>Son Grafik</b></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="chartContainer6" style="height: 450px; margin-left: 4%; margin-bottom: -8%;"></div>
+                            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary5" data-dismiss="modal">Kapat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </section>
         </section>

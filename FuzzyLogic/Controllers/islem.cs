@@ -20,11 +20,21 @@ namespace FuzzyLogic.Controllers
     {
         public Double DuruSonuc { get; set; }
         public List<Double> XList { get; set; }
+        public List<Son> SonGrafikList { get; set; }
     }
     public class DuruSonuc
     {
         public double duruSonuc { get; set; }
     }
+
+    public class Son
+    {
+        public double x { get; set; }
+        public string uyelik { get; set; }
+        public double derece { get; set; }
+
+    }
+
     public class islem
     {
         static int i;
@@ -321,75 +331,133 @@ namespace FuzzyLogic.Controllers
             DuruSonucX sonucNesne = new DuruSonucX();
             sonucNesne.XList = new List<double>();
 
+            List<Son> sonGrafik = new List<Son>();
+
             foreach (var item in RezistansSonuc)
             {
                 double cvr = item.RDerece;
                 if (item.RUyelik == "Çok Az")
                 {
                     nesne = new DuruSonuc();
+                    Son sonNesne = new Son();
+
                     nesne.duruSonuc = 1 - cvr * 0.5;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
                     sonucNesne.XList.Add(nesne.duruSonuc);
+
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Çok Az";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+
                     m++;
                 }
                 if (item.RUyelik == "Az")
                 {
                     nesne = new DuruSonuc();
+                    Son sonNesne = new Son();
+
                     nesne.duruSonuc = cvr * 0.75 + 0.5;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
                     sonucNesne.XList.Add(nesne.duruSonuc);
+
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Az";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+                    sonNesne = new Son();
 
                     nesne.duruSonuc = 2 - cvr * 0.75;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
 
                     sonucNesne.XList.Add(nesne.duruSonuc);
+
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Az";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+
                     m++;
                 }
                 if (item.RUyelik == "Orta")
                 {
                     nesne = new DuruSonuc();
+                    Son sonNesne = new Son();
+
                     nesne.duruSonuc = cvr * 1 + 1.5;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
                     sonucNesne.XList.Add(nesne.duruSonuc);
+
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Orta";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+                    sonNesne = new Son();
 
                     nesne.duruSonuc = 3.5 - cvr * 1;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
                     sonucNesne.XList.Add(nesne.duruSonuc);
 
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Orta";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+
                     m++;
                 }
                 if (item.RUyelik == "Çok")
                 {
                     nesne = new DuruSonuc();
+                    Son sonNesne = new Son();
+
                     nesne.duruSonuc = cvr * 0.75 + 3;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
                     sonucNesne.XList.Add(nesne.duruSonuc);
+
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Çok";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+                    sonNesne = new Son();
 
                     nesne.duruSonuc = 4.5 - cvr * 0.75;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
                     sonucNesne.XList.Add(nesne.duruSonuc);
 
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Çok";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+
                     m++;
                 }
                 if (item.RUyelik == "Aşırı Çok")
                 {
                     nesne = new DuruSonuc();
+                    Son sonNesne = new Son();
+
                     nesne.duruSonuc = cvr * 0.5 + 4;
                     pay = pay + cvr * nesne.duruSonuc;
                     payda = payda + cvr;
                     sonucNesne.XList.Add(nesne.duruSonuc);
 
+                    sonNesne.x = nesne.duruSonuc;
+                    sonNesne.uyelik = "Aşırı Çok";
+                    sonNesne.derece = cvr;
+                    sonGrafik.Add(sonNesne);
+
                     m++;
                 }
             }
 
+            sonucNesne.SonGrafikList = sonGrafik;
             sonucNesne.DuruSonuc = pay / payda;
 
             if (payda == 0)
