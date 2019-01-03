@@ -254,50 +254,188 @@ namespace FuzzyLogic.Controllers
             List<DataPoint> rezistansUyelik2 = new List<DataPoint>();
             List<DataPoint> rezistansUyelik3 = new List<DataPoint>();
             List<DataPoint> rezistansUyelik4 = new List<DataPoint>();
-            rezistansUyelik4.Add(new DataPoint(4, 0));
+
+            
             
             if (rezistansSonucs != null)
             {
-                foreach (var item in rezistansSonucs)
-                {
-                    if ("Çok Az" == item.RUyelik)
-                    {
-                        rezistansUyelik.Add(new DataPoint(0, 1));
-                        rezistansUyelik.Add(new DataPoint(0.5, 1));
-                        rezistansUyelik.Add(new DataPoint(1, 0));
+                List<Son> cokAz = new List<Son>();
+                List<Son> az = new List<Son>();
+                List<Son> orta = new List<Son>();
+                List<Son> cok = new List<Son>();
+                List<Son> asiriCok = new List<Son>();
 
+                int i = 0;
+                int a = 0;
+                int b = 0;
+                int c = 0;
+                int d = 0;
+                foreach (var item in duruSonuc.SonGrafikList)
+                {
+                    if ("Çok Az" == item.uyelik)
+                    {
+                        if (a < 2)
+                        {
+                            cokAz.Add(item);
+                            a++;
+                        }
                     }
                     /* düşük sıcaklık*/
-                    if ("Az" == item.RUyelik)
+                    if ("Az" == item.uyelik)
                     {
-                        rezistansUyelik1.Add(new DataPoint(0.5, 0));
-                        rezistansUyelik1.Add(new DataPoint(1.25, 1));
-                        rezistansUyelik1.Add(new DataPoint(2, 0));
-
+                        if (b < 2)
+                        {
+                            az.Add(item);
+                            b++;
+                        }
                     }
                     /* orta sıcaklık*/
-                    if ("Orta" == item.RUyelik)
+                    if ("Orta" == item.uyelik)
                     {
-                        rezistansUyelik2.Add(new DataPoint(1.5, 0));
-                        rezistansUyelik2.Add(new DataPoint(2.5, 1));
-                        rezistansUyelik2.Add(new DataPoint(3.5, 0));
 
+                        if (c < 2)
+                        {
+                            orta.Add(item);
+                            c++;
+                        }
                     }
                     /* yüksek sıcaklık*/
-                    if ("Çok" == item.RUyelik)
+                    if ("Çok" == item.uyelik)
                     {
-                        rezistansUyelik3.Add(new DataPoint(3, 0));
-                        rezistansUyelik3.Add(new DataPoint(3.75, 1));
-                        rezistansUyelik3.Add(new DataPoint(4.5, 0));
+                        i = 0;
+                        if (d < 2)
+                        {
+                            cok.Add(item);
+                            d++;
+                        }
                     }
                     /* çok yüksek sıcaklık*/
-                    if ("Aşırı Çok" == item.RUyelik)
+                    if ("Aşırı Çok" == item.uyelik)
                     {
-                        rezistansUyelik4.Add(new DataPoint(4, 0));
-                        rezistansUyelik4.Add(new DataPoint(4.5, 1));
-                        rezistansUyelik4.Add(new DataPoint(5, 1));
+                        i = 0;
+                        if (i < 2)
+                        {
+                            asiriCok.Add(item);
+                            i++;
+                        }
                     }
-                } 
+                }
+
+                if (cokAz.Count != 0)
+                {
+                    rezistansUyelik.Add(new DataPoint(0, 1));
+                    rezistansUyelik.Add(new DataPoint(0.5, 1));
+                    foreach (var item in cokAz)
+                    {
+                        rezistansUyelik.Add(new DataPoint(item.x, item.derece));
+                    }
+                    rezistansUyelik.Add(new DataPoint(1, 0));
+                }
+
+                if (az.Count != 0)
+                {
+                    int k = 0;
+                    rezistansUyelik1.Add(new DataPoint(0.5, 0));
+                    foreach (var item in az)
+                    {
+                        rezistansUyelik1.Add(new DataPoint(item.x, item.derece));
+                        if (k == 0)
+                        {
+                            rezistansUyelik1.Add(new DataPoint(1.25, 1));
+                        }
+
+                        k++;
+                    }
+                    rezistansUyelik1.Add(new DataPoint(2, 0));
+                }
+
+                if (orta.Count != 0)
+                {
+                    int k = 0;
+                    rezistansUyelik2.Add(new DataPoint(1.5, 0));
+                    foreach (var item in orta)
+                    {
+                        rezistansUyelik2.Add(new DataPoint(item.x, item.derece));
+                        if (k == 0)
+                        {
+                            rezistansUyelik2.Add(new DataPoint(2.5, 1));
+                        }
+
+                        k++;
+                    }
+                    rezistansUyelik2.Add(new DataPoint(3.5, 0));
+                }
+
+                if (cok.Count != 0)
+                {
+                    int k = 0;
+                    rezistansUyelik3.Add(new DataPoint(3, 0));
+                    foreach (var item in cok)
+                    {
+                        rezistansUyelik3.Add(new DataPoint(item.x, item.derece));
+                        if (k == 0)
+                        {
+                            rezistansUyelik3.Add(new DataPoint(3.75, 1));
+                        }
+                    }
+                    rezistansUyelik3.Add(new DataPoint(4.5, 0));
+                }
+
+                if (asiriCok.Count != 0)
+                {
+                    int k = 0;
+                    rezistansUyelik4.Add(new DataPoint(4, 0));
+                    foreach (var item in asiriCok)
+                    {
+                        rezistansUyelik4.Add(new DataPoint(item.x, item.derece));
+                        if (k != 0)
+                        {
+                            rezistansUyelik4.Add(new DataPoint(4.5, 1));
+                        }
+                    }
+                    rezistansUyelik4.Add(new DataPoint(5, 1));
+                }
+
+                //foreach (var item in rezistansSonucs)
+                //{
+                //    if ("Çok Az" == item.RUyelik)
+                //    {
+                //        rezistansUyelik.Add(new DataPoint(0, 1));
+                //        rezistansUyelik.Add(new DataPoint(0.5, 1));
+                //        rezistansUyelik.Add(new DataPoint(1, 0));
+
+                //    }
+                //    /* düşük sıcaklık*/
+                //    if ("Az" == item.RUyelik)
+                //    {
+                //        rezistansUyelik1.Add(new DataPoint(0.5, 0));
+                //        rezistansUyelik1.Add(new DataPoint(1.25, 1));
+                //        rezistansUyelik1.Add(new DataPoint(2, 0));
+
+                //    }
+                //    /* orta sıcaklık*/
+                //    if ("Orta" == item.RUyelik)
+                //    {
+                //        rezistansUyelik2.Add(new DataPoint(1.5, 0));
+                //        rezistansUyelik2.Add(new DataPoint(2.5, 1));
+                //        rezistansUyelik2.Add(new DataPoint(3.5, 0));
+
+                //    }
+                //    /* yüksek sıcaklık*/
+                //    if ("Çok" == item.RUyelik)
+                //    {
+                //        rezistansUyelik3.Add(new DataPoint(3, 0));
+                //        rezistansUyelik3.Add(new DataPoint(3.75, 1));
+                //        rezistansUyelik3.Add(new DataPoint(4.5, 0));
+                //    }
+                //    /* çok yüksek sıcaklık*/
+                //    if ("Aşırı Çok" == item.RUyelik)
+                //    {
+                //        rezistansUyelik4.Add(new DataPoint(4, 0));
+                //        rezistansUyelik4.Add(new DataPoint(4.5, 1));
+                //        rezistansUyelik4.Add(new DataPoint(5, 1));
+                //    }
+                //} 
             }
 
             rezistansUyelik.Add(new DataPoint(1, 0));
@@ -387,7 +525,7 @@ namespace FuzzyLogic.Controllers
 
                 if (cokAz.Count != 0)
                 {
-                    sonGrafikUyelik.Add(new DataPoint(0, 0));
+                    sonGrafikUyelik.Add(new DataPoint(0, cokAz[0].derece));
                     foreach (var item in cokAz)
                     {
                         sonGrafikUyelik.Add(new DataPoint(item.x, item.derece));
@@ -432,7 +570,7 @@ namespace FuzzyLogic.Controllers
                     {
                         sonGrafikUyelik4.Add(new DataPoint(item.x, item.derece));
                     }
-                    sonGrafikUyelik4.Add(new DataPoint(5, 1));
+                    sonGrafikUyelik4.Add(new DataPoint(5, asiriCok[0].derece));
                 }
 
             }
