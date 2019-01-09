@@ -12,6 +12,8 @@ namespace FuzzyLogic.Controllers
     {
         private static List<RezistansSonuc> rezistansSonucs;
         private static DuruSonucX duruSonuc;
+        private static List<Sicaklik> sicaklikUyelikDerece;
+        private static List<Seviye> seviyeUyelikDerece;
 
         // GET: Index
         public ActionResult Index()
@@ -272,51 +274,58 @@ namespace FuzzyLogic.Controllers
                 int d = 0;
                 foreach (var item in duruSonuc.SonGrafikList)
                 {
-                    if ("Çok Az" == item.uyelik)
+                    if (item.derece != 0)
                     {
-                        if (a < 2)
+                        if ("Çok Az" == item.uyelik)
                         {
-                            cokAz.Add(item);
-                            a++;
+                            if (a < 2)
+                            {
+                                cokAz.Add(item);
+                                a++;
+                            }
                         }
-                    }
-                    /* düşük sıcaklık*/
-                    if ("Az" == item.uyelik)
-                    {
-                        if (b < 2)
-                        {
-                            az.Add(item);
-                            b++;
-                        }
-                    }
-                    /* orta sıcaklık*/
-                    if ("Orta" == item.uyelik)
-                    {
 
-                        if (c < 2)
+                        /* düşük sıcaklık*/
+                        if ("Az" == item.uyelik)
                         {
-                            orta.Add(item);
-                            c++;
+                            if (b < 2)
+                            {
+                                az.Add(item);
+                                b++;
+                            }
                         }
-                    }
-                    /* yüksek sıcaklık*/
-                    if ("Çok" == item.uyelik)
-                    {
-                        i = 0;
-                        if (d < 2)
+
+                        /* orta sıcaklık*/
+                        if ("Orta" == item.uyelik)
                         {
-                            cok.Add(item);
-                            d++;
+
+                            if (c < 2)
+                            {
+                                orta.Add(item);
+                                c++;
+                            }
                         }
-                    }
-                    /* çok yüksek sıcaklık*/
-                    if ("Aşırı Çok" == item.uyelik)
-                    {
-                        i = 0;
-                        if (i < 2)
+
+                        /* yüksek sıcaklık*/
+                        if ("Çok" == item.uyelik)
                         {
-                            asiriCok.Add(item);
-                            i++;
+                            i = 0;
+                            if (d < 2)
+                            {
+                                cok.Add(item);
+                                d++;
+                            }
+                        }
+
+                        /* çok yüksek sıcaklık*/
+                        if ("Aşırı Çok" == item.uyelik)
+                        {
+                            i = 0;
+                            if (i < 2)
+                            {
+                                asiriCok.Add(item);
+                                i++;
+                            }
                         }
                     }
                 }
@@ -388,11 +397,8 @@ namespace FuzzyLogic.Controllers
                     foreach (var item in asiriCok)
                     {
                         rezistansUyelik4.Add(new DataPoint(item.x, item.derece));
-                        if (k != 0)
-                        {
-                            rezistansUyelik4.Add(new DataPoint(4.5, 1));
-                        }
                     }
+                    rezistansUyelik4.Add(new DataPoint(4.5, 1));
                     rezistansUyelik4.Add(new DataPoint(5, 1));
                 }
 
@@ -473,7 +479,8 @@ namespace FuzzyLogic.Controllers
                 int c = 0;
                 int d = 0;
                 foreach (var item in duruSonuc.SonGrafikList)
-                {
+                {if(item.derece != 0)
+                    { 
                     if ("Çok Az" == item.uyelik)
                     { 
                         if (a < 2)
@@ -518,6 +525,7 @@ namespace FuzzyLogic.Controllers
                             asiriCok.Add(item);
                             i++;
                         }
+                    }
                     }
                 }
 
@@ -582,6 +590,10 @@ namespace FuzzyLogic.Controllers
             ViewBag.sonGrafikUyelik4 = JsonConvert.SerializeObject(sonGrafikUyelik4);
 
             ViewBag.rezistansSonuc = rezistansSonucs;
+            ViewBag.sicaklikUyelikDerece = sicaklikUyelikDerece;
+            ViewBag.seviyeUyelikDerece = seviyeUyelikDerece;
+            ViewBag.girilenSicaklik = TempData["sicaklik"];
+            ViewBag.girilenSeviye = TempData["seviye"];
 
             if (duruSonuc != null)
             {
@@ -598,19 +610,22 @@ namespace FuzzyLogic.Controllers
 
             var nesne = new islem();
             var k = nesne.hesapla(x);
-                var l = nesne.hesapla2(y);
+            var l = nesne.hesapla2(y);
 
-                var tablo = nesne.yukle();
-                var rezistansSonuc = nesne.cikarim(k, l, tablo);
-                DuruSonucX sonuc = nesne.durulastirma(rezistansSonuc);
-                if (sonuc.DuruSonuc == -999)
-                {
-                    TempData["Hata"] = "Çıkışta Hareket Yok";
-                }
-                else
-                {
-                    TempData["Hata"] = sonuc.DuruSonuc;
-                }
+            sicaklikUyelikDerece = k;
+            seviyeUyelikDerece = l;
+
+            var tablo = nesne.yukle();
+            var rezistansSonuc = nesne.cikarim(k, l, tablo);
+            DuruSonucX sonuc = nesne.durulastirma(rezistansSonuc);
+            if (sonuc.DuruSonuc == -999)
+            {
+                TempData["Hata"] = "Çıkışta Hareket Yok";
+            }
+            else
+            {
+                TempData["Hata"] = sonuc.DuruSonuc;
+            }
 
             duruSonuc = sonuc;
             rezistansSonucs = rezistansSonuc;
